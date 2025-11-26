@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国移动全球通尊享权益</title>
+    
+    <!-- 微信跳转引导 -->
+    <script>
+        // 检测是否在微信内打开
+        function isWeixin() {
+            return /micromessenger/i.test(navigator.userAgent);
+        }
+        
+        // 创建引导遮罩层
+        function createWeixinGuide() {
+            const guide = document.createElement('div');
+            guide.id = 'weixin-guide';
+            guide.innerHTML = `
+                <div class="guide-overlay">
+                    <div class="guide-content">
+                        <div class="guide-header">
+                            <h3>温馨提示</h3>
+                        </div>
+                        <div class="guide-body">
+                            <p>由于微信限制，请点击右上角</p>
+                            <p>选择"在浏览器打开"</p>
+                            <div class="guide-icon">
+                                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                    <rect x="16" y="8" width="48" height="64" rx="8" fill="#0085ff"/>
+                                    <circle cx="40" cy="24" r="6" fill="white"/>
+                                    <rect x="28" y="36" width="24" height="2" rx="1" fill="white"/>
+                                    <rect x="28" y="40" width="24" height="2" rx="1" fill="white"/>
+                                    <rect x="28" y="44" width="20" height="2" rx="1" fill="white"/>
+                                </svg>
+                            </div>
+                            <p class="guide-tip">使用浏览器访问可获得更好体验</p>
+                        </div>
+                        <div class="guide-footer">
+                            <button id="close-guide" class="guide-btn">我知道了</button>
+                            <button id="retry-btn" class="guide-btn primary">我已打开浏览器</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(guide);
+            
+            // 点击关闭引导
+            document.getElementById('close-guide').addEventListener('click', function() {
+                document.getElementById('weixin-guide').style.display = 'none';
+            });
+            
+            // 重试按钮
+            document.getElementById('retry-btn').addEventListener('click', function() {
+                location.reload();
+            });
+        }
+        
+        // 页面加载时检测
+        window.onload = function() {
+            if (isWeixin()) {
+                createWeixinGuide();
+            }
+        };
+    </script>
+    
+    <style>
+        /* 微信引导层样式 */
+        #weixin-guide {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+        
+        .guide-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .guide-content {
+            background: white;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 320px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: guideFadeIn 0.4s ease;
+        }
+        
+        @keyframes guideFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .guide-header {
+            background: linear-gradient(135deg, #0085ff 0%, #0066cc 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .guide-header h3 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .guide-body {
+            padding: 25px 20px;
+            text-align: center;
+        }
+        
+        .guide-body p {
+            margin: 0 0 10px;
+            color: #333;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        
+        .guide-icon {
+            margin: 20px 0;
+        }
+        
+        .guide-tip {
+            color: #666;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+        
+        .guide-footer {
+            padding: 0 20px 20px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .guide-btn {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            background: white;
+            color: #333;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .guide-btn.primary {
+            background: linear-gradient(135deg, #0085ff 0%, #0066cc 100%);
+            color: white;
+            border: none;
+        }
+        
+        .guide-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 原有的样式保持不变 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f0f8ff 0%, #e6f0ff 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #333;
+        }
+
+        .promotion-container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 82, 204, 0.15);
+        }
+
+        /* 头部区域 */
+        .header {
+            background: linear-gradient(135deg, #0085ff 0%, #0066cc 100%);
+            padding: 25px 20px;
+            position: relative;
+            color: white;
+            text-align: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .china-mobile-logo {
+            width: 120px;
+            height: 30px;
+            background: white;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #0066cc;
+            font-size: 14px;
+        }
+
+        .global-pass-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+
+        .main-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 10px 0;
+            letter-spacing: 1px;
+        }
+
+        .sub-title {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* 五大尊享标识 */
+        .five-privileges-badge {
+            background: linear-gradient(135deg, #ff9500 0%, #ff6b00 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 16px;
+            display: inline-block;
+            margin: 15px auto;
+            box-shadow: 0 4px 12px rgba(255, 107, 0, 0.3);
+        }
+
+        /* 内容区域 */
+        .content-section {
+            padding: 0 15px 20px;
+        }
+
+        .privileges-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .privilege-card {
+            background: #f8fbff;
+            border-radius: 15px;
+            padding: 15px;
+            border: 1px solid #e6f0ff;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .privilege-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 102, 204, 0.15);
+            border-color: #b3d9ff;
+        }
+
+        .privilege-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #0085ff, #00c6ff);
+        }
+
+        .privilege-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .privilege-icon {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, #0085ff 0%, #00c6ff 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .privilege-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0052cc;
+        }
+
+        /* 横向排列的权益项目 - 移动端改为两排 */
+        .privilege-items {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .privilege-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 12px 8px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .privilege-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 102, 204, 0.1);
+            background: white;
+        }
+
+        .item-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #0085ff 0%, #00c6ff 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            color: white;
+            font-size: 20px;
+        }
+
+        .item-text {
+            font-size: 12px;
+            font-weight: 500;
+            color: #4a6fa5;
+            line-height: 1.4;
+        }
+
+        .highlight-tag {
+            background: linear-gradient(135deg, #ff9500 0%, #ff6b00 100%);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 600;
+            margin-left: 5px;
+        }
+
+        /* 特殊权益卡片 */
+        .special-privilege {
+            background: linear-gradient(135deg, #fff8e6 0%, #fff0cc 100%);
+            border: 1px solid #ffe4b3;
+        }
+
+        .special-privilege::before {
+            background: linear-gradient(90deg, #ff9500, #ff6b00);
+        }
+
+        .special-privilege .privilege-icon {
+            background: linear-gradient(135deg, #ff9500 0%, #ff6b00 100%);
+        }
+
+        .special-privilege .privilege-title {
+            color: #e55a00;
+        }
+
+        .special-privilege .item-icon {
+            background: linear-gradient(135deg, #ff9500 0%, #ff6b00 100%);
+        }
+
+        .special-privilege .item-text {
+            color: #b36b00;
+        }
+
+        /* 底部特殊权益区域 */
+        .bottom-privileges {
+            background: #f0f8ff;
+            margin: 20px -15px 0;
+            padding: 20px 15px;
+            border-top: 1px solid #e6f0ff;
+        }
+
+        .bottom-privileges-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .bottom-privilege-item {
+            background: white;
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid #e6f0ff;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .bottom-privilege-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 102, 204, 0.1);
+        }
+
+        .bottom-privilege-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #0085ff 0%, #00c6ff 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            color: white;
+            font-size: 20px;
+        }
+
+        .bottom-privilege-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #0052cc;
+        }
+
+        /* 响应式设计 - 平板和桌面 */
+        @media (min-width: 768px) {
+            body {
+                padding: 20px;
+            }
+            
+            .promotion-container {
+                max-width: 750px;
+            }
+            
+            .header {
+                padding: 30px 25px;
+            }
+            
+            .main-title {
+                font-size: 28px;
+            }
+            
+            .sub-title {
+                font-size: 16px;
+            }
+            
+            .content-section {
+                padding: 0 25px 30px;
+            }
+            
+            .privileges-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+                margin-top: 30px;
+            }
+            
+            .privilege-card {
+                padding: 20px;
+            }
+            
+            .privilege-header {
+                margin-bottom: 20px;
+            }
+            
+            .privilege-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+            
+            .privilege-title {
+                font-size: 18px;
+            }
+            
+            .privilege-items {
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+                gap: 15px;
+            }
+            
+            .privilege-item {
+                padding: 15px 10px;
+            }
+            
+            .item-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+                margin-bottom: 10px;
+            }
+            
+            .item-text {
+                font-size: 13px;
+            }
+            
+            .bottom-privileges {
+                margin: 25px -25px 0;
+                padding: 25px;
+            }
+            
+            .bottom-privileges-grid {
+                gap: 15px;
+                margin-top: 20px;
+            }
+            
+            .bottom-privilege-item {
+                padding: 15px;
+            }
+            
+            .bottom-privilege-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+                margin-bottom: 10px;
+            }
+            
+            .bottom-privilege-title {
+                font-size: 14px;
+            }
+        }
+
+        /* 动画效果 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .privilege-card {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .privilege-card:nth-child(1) { animation-delay: 0.1s; }
+        .privilege-card:nth-child(2) { animation-delay: 0.2s; }
+        .privilege-card:nth-child(3) { animation-delay: 0.3s; }
+        .privilege-card:nth-child(4) { animation-delay: 0.4s; }
+        .privilege-card:nth-child(5) { animation-delay: 0.5s; }
+
+        /* 模态框样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: modalFadeIn 0.3s ease;
+            overflow: hidden;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #0085ff 0%, #0066cc 100%);
+            color: white;
+            padding: 20px;
+            position: relative;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .modal-subtitle {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .detail-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #0052cc;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .detail-value {
+            color: #4a6fa5;
+            font-size: 14px;
+        }
+
+        .apply-btn {
+            background: linear-gradient(135deg, #ff9500 0%, #ff6b00 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto 0;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .apply-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="promotion-container">
+        <!-- 头部区域 -->
+        <div class="header">
+            <div class="logo-section">
+                <div class="china-mobile-logo">中国移动</div>
+                <div class="global-pass-badge">全球通</div>
+            </div>
+            <h1 class="main-title">全球通客户月月享福利</h1>
+            <p class="sub-title">五大尊享权益，为您专属定制</p>
+        </div>
+
+        <!-- 五大尊享标识 -->
+        <div style="text-align: center;">
+            <div class="five-privileges-badge">五大尊享</div>
+        </div>
+
+        <!-- 内容区域 -->
+        <div class="content-section">
+            <div class="privileges-grid">
+                <!-- 尊享服务 -->
+                <div class="privilege-card">
+                    <div class="privilege-header">
+                        <div class="privilege-icon">📞</div>
+                        <div class="privilege-title">尊享服务 <span class="highlight-tag">HOT</span></div>
+                    </div>
+                    <div class="privilege-items">
+                        <div class="privilege-item" data-id="priority-access">
+                            <div class="item-icon">🎯</div>
+                            <div class="item-text">10086优先接入</div>
+                        </div>
+                        <div class="privilege-item" data-id="complaint-priority">
+                            <div class="item-icon">⚡</div>
+                            <div class="item-text">投诉优先处理</div>
+                        </div>
+                        <div class="privilege-item" data-id="hall-service">
+                            <div class="item-icon">🏢</div>
+                            <div class="item-text">营业厅代领</div>
+                        </div>
+                        <div class="privilege-item" data-id="benefit-service">
+                            <div class="item-icon">🎁</div>
+                            <div class="item-text">权益代领</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 尊享权益 -->
+                <div class="privilege-card">
+                    <div class="privilege-header">
+                        <div class="privilege-icon">✈️</div>
+                        <div class="privilege-title">尊享权益</div>
+                    </div>
+                    <div class="privilege-items">
+                        <div class="privilege-item" data-id="airport-lounge">
+                            <div class="item-icon">🛋️</div>
+                            <div class="item-text">机场休息室</div>
+                        </div>
+                        <div class="privilege-item" data-id="train-lounge">
+                            <div class="item-icon">🚄</div>
+                            <div class="item-text">高铁休息室</div>
+                        </div>
+                        <div class="privilege-item" data-id="business-travel">
+                            <div class="item-icon">🧳</div>
+                            <div class="item-text">商旅礼遇</div>
+                        </div>
+                        <div class="privilege-item" data-id="four-seasons">
+                            <div class="item-icon">🌸</div>
+                            <div class="item-text">四季之旅</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 尊享保障 -->
+                <div class="privilege-card">
+                    <div class="privilege-header">
+                        <div class="privilege-icon">🛡️</div>
+                        <div class="privilege-title">尊享保障</div>
+                    </div>
+                    <div class="privilege-items">
+                        <div class="privilege-item" data-id="card-replacement">
+                            <div class="item-icon">💳</div>
+                            <div class="item-text">无忧补换卡</div>
+                        </div>
+                        <div class="privilege-item" data-id="emergency-on">
+                            <div class="item-icon">🔋</div>
+                            <div class="item-text">紧急开机</div>
+                        </div>
+                        <div class="privilege-item" data-id="birthday-free">
+                            <div class="item-icon">🎂</div>
+                            <div class="item-text">生日免单</div>
+                        </div>
+                        <div class="privilege-item" data-id="cloud-member">
+                            <div class="item-icon">☁️</div>
+                            <div class="item-text">云盘会员</div>
+                        </div>
+                        <div class="privilege-item" data-id="free-sms">
+                            <div class="item-icon">💬</div>
+                            <div class="item-text">免费短信100条</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 尊享网络 -->
+                <div class="privilege-card">
+                    <div class="privilege-header">
+                        <div class="privilege-icon">📡</div>
+                        <div class="privilege-title">尊享网络</div>
+                    </div>
+                    <div class="privilege-items">
+                        <div class="privilege-item" data-id="repair-before-16">
+                            <div class="item-icon">🔧</div>
+                            <div class="item-text">16点前报修，当日完成</div>
+                        </div>
+                        <div class="privilege-item" data-id="repair-after-16">
+                            <div class="item-icon">🛠️</div>
+                            <div class="item-text">16点后报修，次日完成</div>
+                        </div>
+                        <div class="privilege-item" data-id="install-before-16">
+                            <div class="item-icon">📦</div>
+                            <div class="item-text">16点前报装，当日完成</div>
+                        </div>
+                        <div class="privilege-item" data-id="install-after-16">
+                            <div class="item-icon">📦</div>
+                            <div class="item-text">16点后报装，次日完成</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 尊享身份 -->
+                <div class="privilege-card special-privilege">
+                    <div class="privilege-header">
+                        <div class="privilege-icon">👑</div>
+                        <div class="privilege-title">尊享身份</div>
+                    </div>
+                    <div class="privilege-items">
+                        <div class="privilege-item" data-id="security-manager">
+                            <div class="item-icon">🔒</div>
+                            <div class="item-text">移动安全管家</div>
+                        </div>
+                        <div class="privilege-item" data-id="brand-upgrade">
+                            <div class="item-icon">⬆️</div>
+                            <div class="item-text">品牌等级免费升一级</div>
+                        </div>
+                        <div class="privilege-item" data-id="network-growth">
+                            <div class="item-icon">📈</div>
+                            <div class="item-text">网龄成长不设限</div>
+                        </div>
+                        <div class="privilege-item" data-id="diamond-card">
+                            <div class="item-icon">💎</div>
+                            <div class="item-text">特邀升级卓越钻石卡</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部特殊权益 -->
+        <div class="bottom-privileges">
+            <div style="text-align: center; margin-bottom: 15px;">
+                <div style="font-size: 16px; font-weight: 600; color: #0052cc;">更多专属权益</div>
+            </div>
+            <div class="bottom-privileges-grid">
+                <div class="bottom-privilege-item" data-id="hotel-discount">
+                    <div class="bottom-privilege-icon">🏨</div>
+                    <div class="bottom-privilege-title">订房8折起</div>
+                </div>
+                <div class="bottom-privilege-item" data-id="data-package">
+                    <div class="bottom-privilege-icon">🎁</div>
+                    <div class="bottom-privilege-title">7GB流量包</div>
+                </div>
+                <div class="bottom-privilege-item" data-id="ticket-lottery">
+                    <div class="bottom-privilege-icon">🎰</div>
+                    <div class="bottom-privilege-title">抽2000元机票</div>
+                </div>
+                <div class="bottom-privilege-item" data-id="communication-care">
+                    <div class="bottom-privilege-icon">📱</div>
+                    <div class="bottom-privilege-title">通信无忧</div>
+                </div>
+                <div class="bottom-privilege-item" data-id="exclusive-identity">
+                    <div class="bottom-privilege-icon">💎</div>
+                    <div class="bottom-privilege-title">稀缺性身份</div>
+                </div>
+                <div class="bottom-privilege-item" data-id="birthday-free2">
+                    <div class="bottom-privilege-icon">🎂</div>
+                    <div class="bottom-privilege-title">生日免单</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 模态框 -->
+    <div class="modal" id="detailModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="close-btn" id="closeModal">×</div>
+                <div class="modal-title" id="modalTitle">权益详情</div>
+                <div class="modal-subtitle" id="modalSubtitle">查看详细信息</div>
+            </div>
+            <div class="modal-body">
+                <div class="detail-item">
+                    <div class="detail-label">权益描述</div>
+                    <div class="detail-value" id="modalDescription">这里是权益的详细描述</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">截止日期</div>
+                    <div class="detail-value" id="modalDeadline">2023年12月31日</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">套餐要求</div>
+                    <div class="detail-value" id="modalRequirement">月消费不低于88元</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">权益范围</div>
+                    <div class="detail-value" id="modalScope">全国范围内适用</div>
+                </div>
+                <button class="apply-btn" id="applyBtn">立即办理</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 权益数据
+        const privilegeData = {
+            // 尊享服务
+            "priority-access": {
+                title: "10086优先接入",
+                description: "作为全球通尊享客户，您拨打10086热线时将享受优先接入服务，无需排队等待，直接接通专属客服。",
+                deadline: "长期有效",
+                requirement: "全球通银卡及以上级别客户",
+                scope: "全国范围内拨打10086热线"
+            },
+            "complaint-priority": {
+                title: "投诉优先处理",
+                description: "您的投诉将进入优先处理通道，我们承诺在24小时内给您首次回复，72小时内解决您的问题。",
+                deadline: "长期有效",
+                requirement: "全球通金卡及以上级别客户",
+                scope: "全国范围内投诉处理"
+            },
+            "hall-service": {
+                title: "营业厅代领",
+                description: "您可委托他人凭您的身份证复印件及授权书到营业厅代办业务，包括补换卡、套餐变更等。",
+                deadline: "长期有效",
+                requirement: "全球通银卡及以上级别客户",
+                scope: "全国指定营业厅"
+            },
+            "benefit-service": {
+                title: "权益代领",
+                description: "您可委托他人代领您的专属权益，包括机场休息室、流量包等，只需提供您的身份证复印件及授权书。",
+                deadline: "长期有效",
+                requirement: "全球通金卡及以上级别客户",
+                scope: "全国范围内权益领取"
+            },
+            
+            // 尊享权益
+            "airport-lounge": {
+                title: "机场休息室",
+                description: "凭全球通身份可免费使用全国主要机场的贵宾休息室，享受舒适候机环境及免费茶点、WiFi等服务。",
+                deadline: "2023年12月31日",
+                requirement: "全球通白金卡及以上级别客户，每月可享2次",
+                scope: "全国50+主要机场"
+            },
+            "train-lounge": {
+                title: "高铁休息室",
+                description: "凭全球通身份可免费使用全国主要高铁站的商务休息室，享受舒适候车环境及免费茶点服务。",
+                deadline: "2023年12月31日",
+                requirement: "全球通金卡及以上级别客户，每月可享2次",
+                scope: "全国30+主要高铁站"
+            },
+            "business-travel": {
+                title: "商旅礼遇",
+                description: "专为商旅人士定制的增值服务，包括酒店预订优惠、租车折扣、机场快速通道等专属权益。",
+                deadline: "2023年12月31日",
+                requirement: "全球通白金卡及以上级别客户",
+                scope: "全国范围内合作商户"
+            },
+            "four-seasons": {
+                title: "四季之旅",
+                description: "根据季节变化推出的特色主题活动，包括春季踏青、夏季避暑、秋季赏枫、冬季温泉等专属旅游体验。",
+                deadline: "2023年12月31日",
+                requirement: "全球通钻石卡客户",
+                scope: "全国指定景区及合作旅行社"
+            },
+            
+            // 尊享保障
+            "card-replacement": {
+                title: "无忧补换卡",
+                description: "SIM卡损坏或丢失时，可免费补换卡，无需支付工本费，并享受快递上门配送服务。",
+                deadline: "长期有效",
+                requirement: "全球通银卡及以上级别客户，每年可享3次",
+                scope: "全国范围内指定营业厅"
+            },
+            "emergency-on": {
+                title: "紧急开机",
+                description: "因欠费停机时，可申请紧急开机服务，获得24小时应急通信时间，避免重要通信中断。",
+                deadline: "长期有效",
+                requirement: "全球通金卡及以上级别客户，每半年可享1次",
+                scope: "全国范围内"
+            },
+            "birthday-free": {
+                title: "生日免单",
+                description: "在您生日当月，可享受一次通信费用免单权益，最高免单金额为100元。",
+                deadline: "长期有效",
+                requirement: "全球通白金卡及以上级别客户",
+                scope: "全国范围内"
+            },
+            "cloud-member": {
+                title: "云盘会员",
+                description: "免费获得中国移动和彩云网盘会员服务，享受2TB超大存储空间及高速上传下载特权。",
+                deadline: "2023年12月31日",
+                requirement: "全球通金卡及以上级别客户",
+                scope: "全国范围内"
+            },
+            "free-sms": {
+                title: "免费短信100条",
+                description: "每月赠送100条免费短信，超出部分按标准资费收取，满足您的日常通信需求。",
+                deadline: "长期有效",
+                requirement: "全球通银卡及以上级别客户",
+                scope: "全国范围内"
+            },
+            
+            // 尊享网络
+            "repair-before-16": {
+                title: "16点前报修，当日完成",
+                description: "在工作日16点前申报的宽带故障，我们承诺当日完成修复，确保您的网络畅通。",
+                deadline: "长期有效",
+                requirement: "全球通金卡及以上级别客户",
+                scope: "全国主要城市"
+            },
+            "repair-after-16": {
+                title: "16点后报修，次日完成",
+                description: "在工作日16点后申报的宽带故障，我们承诺次日完成修复，提供高效服务保障。",
+                deadline: "长期有效",
+                requirement: "全球通金卡及以上级别客户",
+                scope: "全国主要城市"
+            },
+            "install-before-16": {
+                title: "16点前报装，当日完成",
+                description: "在工作日16点前申请的宽带新装业务，我们承诺当日完成安装，让您快速畅享网络。",
+                deadline: "长期有效",
+                requirement: "全球通白金卡及以上级别客户",
+                scope: "全国主要城市"
+            },
+            "install-after-16": {
+                title: "16点后报装，次日完成",
+                description: "在工作日16点后申请的宽带新装业务，我们承诺次日完成安装，提供高效服务。",
+                deadline: "长期有效",
+                requirement: "全球通白金卡及以上级别客户",
+                scope: "全国主要城市"
+            },
+            
+            // 尊享身份
+            "security-manager": {
+                title: "移动安全管家",
+                description: "提供全方位的通信安全保障服务，包括骚扰电话拦截、诈骗短信过滤、手机病毒查杀等。",
+                deadline: "长期有效",
+                requirement: "全球通金卡及以上级别客户",
+                scope: "全国范围内"
+            },
+            "brand-upgrade": {
+                title: "品牌等级免费升一级",
+                description: "您的全球通品牌等级可免费提升一级，享受更高级别的专属权益和服务。",
+                deadline: "2023年12月31日",
+                requirement: "全球通银卡及以上级别客户，每年可申请一次",
+                scope: "全国范围内"
+            },
+            "network-growth": {
+                title: "网龄成长不设限",
+                description: "您的网龄成长值不设上限，网龄越长，享受的权益越多，包括更多流量、更多通话时长等。",
+                deadline: "长期有效",
+                requirement: "全球通所有级别客户",
+                scope: "全国范围内"
+            },
+            "diamond-card": {
+                title: "特邀升级卓越钻石卡",
+                description: "根据您的消费及忠诚度表现，有机会被特邀升级为卓越钻石卡客户，享受最高级别的专属权益。",
+                deadline: "长期有效",
+                requirement: "全球通白金卡客户，年消费满5000元",
+                scope: "全国范围内"
+            },
+            
+            // 底部特殊权益
+            "hotel-discount": {
+                title: "订房8折起",
+                description: "通过中国移动专属渠道预订合作酒店，可享受最低8折优惠，覆盖全国3000+家酒店。",
+                deadline: "2023年12月31日",
+                requirement: "全球通银卡及以上级别客户",
+                scope: "全国合作酒店"
+            },
+            "data-package": {
+                title: "7GB流量包",
+                description: "每月赠送7GB国内通用流量，当月有效，不可结转至下月，满足您的日常上网需求。",
+                deadline: "2023年12月31日",
+                requirement: "全球通金卡及以上级别客户",
+                scope: "全国范围内（不含港澳台）"
+            },
+            "ticket-lottery": {
+                title: "抽2000元机票",
+                description: "每月参与抽奖活动，有机会赢取价值2000元的国内机票代金券，让您的出行更加轻松。",
+                deadline: "2023年12月31日",
+                requirement: "全球通所有级别客户",
+                scope: "全国范围内"
+            },
+            "communication-care": {
+                title: "通信无忧",
+                description: "提供通信保障服务，包括国际漫游优惠、话费透支、异地补卡等，让您出行无忧。",
+                deadline: "长期有效",
+                requirement: "全球通白金卡及以上级别客户",
+                scope: "全国范围内及部分国际漫游地区"
+            },
+            "exclusive-identity": {
+                title: "稀缺性身份",
+                description: "作为全球通尊享客户，您拥有稀缺性身份标识，在合作商户消费时可享受专属礼遇。",
+                deadline: "长期有效",
+                requirement: "全球通钻石卡客户",
+                scope: "全国合作高端商户"
+            },
+            "birthday-free2": {
+                title: "生日免单",
+                description: "在您生日当月，可享受一次通信费用免单权益，最高免单金额为200元。",
+                deadline: "长期有效",
+                requirement: "全球通钻石卡客户",
+                scope: "全国范围内"
+            }
+        };
+
+        // 获取DOM元素
+        const modal = document.getElementById('detailModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalSubtitle = document.getElementById('modalSubtitle');
+        const modalDescription = document.getElementById('modalDescription');
+        const modalDeadline = document.getElementById('modalDeadline');
+        const modalRequirement = document.getElementById('modalRequirement');
+        const modalScope = document.getElementById('modalScope');
+        const closeModal = document.getElementById('closeModal');
+        const applyBtn = document.getElementById('applyBtn');
+
+        // 为所有可点击的权益项添加事件监听
+        document.querySelectorAll('.privilege-item, .bottom-privilege-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const privilegeId = this.getAttribute('data-id');
+                if (privilegeData[privilegeId]) {
+                    const data = privilegeData[privilegeId];
+                    modalTitle.textContent = data.title;
+                    modalSubtitle.textContent = '权益详细信息';
+                    modalDescription.textContent = data.description;
+                    modalDeadline.textContent = data.deadline;
+                    modalRequirement.textContent = data.requirement;
+                    modalScope.textContent = data.scope;
+                    
+                    // 显示模态框
+                    modal.style.display = 'flex';
+                }
+            });
+        });
+
+        // 关闭模态框
+        closeModal.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        // 点击模态框外部关闭
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // 立即办理按钮
+        applyBtn.addEventListener('click', function() {
+            alert('为保障你的财产安全，请前往线下营业厅办理！');
+            modal.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
